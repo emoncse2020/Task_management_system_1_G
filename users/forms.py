@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from tasks.forms import StyledFormMixin
 import re
-
+from django.contrib.auth.forms import AuthenticationForm
 
 
 
@@ -70,3 +70,7 @@ class CustomRegistrationForm(StyledFormMixin,forms.ModelForm):
         if email_exists:
             raise forms.ValidationError("Email Already Exist")
         return email
+    
+class LoginForm(StyledFormMixin, AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
